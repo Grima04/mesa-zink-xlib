@@ -18,10 +18,7 @@ Meson (`docs/meson.rst <https://mesa3d.org/meson.html>`_):
 
 .. code-block:: sh
 
-  $ mkdir build
-  $ cd build
-  $ meson ..
-  $ sudo ninja install
+  $ meson . build -Dgallium-va=false -Ddri-drivers= -Dgallium-drivers=virgl,zink,swrast -Ddri3=false -Dvulkan-drivers= -Dglx=gallium-xlib -Dplatforms=x11
 
 
 Support
