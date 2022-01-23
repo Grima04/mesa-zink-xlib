@@ -55,6 +55,8 @@
 #define XXH_INLINE_ALL
 #include "util/xxhash.h"
 
+struct pipe_context* zink_xlib_context;
+
 static void
 incr_curr_batch(struct zink_context *ctx)
 {
@@ -2653,6 +2655,8 @@ zink_context_create(struct pipe_screen *pscreen, void *priv, unsigned flags)
       tc->bytes_mapped_limit = screen->total_mem / 4;
       ctx->base.set_context_param = zink_set_context_param;
    }
+
+   zink_xlib_context = (struct pipe_context*)tc;
 
    return (struct pipe_context*)tc;
 
