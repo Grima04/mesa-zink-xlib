@@ -48,6 +48,8 @@
 
 #include "frontend/sw_winsys.h"
 
+extern struct pipe_context* zink_xlib_context;
+
 static const struct debug_named_value
 zink_debug_options[] = {
    { "nir", ZINK_DEBUG_NIR, "Dump NIR during program compile" },
@@ -1074,6 +1076,11 @@ zink_flush_frontbuffer(struct pipe_screen *pscreen,
 
    if (map) {
       struct pipe_transfer *transfer = NULL;
+
+      // Context hack
+      //if(!pcontext)
+      pcontext = zink_xlib_context;
+
       void *res_map = pipe_transfer_map(pcontext, pres, level, layer, PIPE_MAP_READ, 0, 0,
                                         u_minify(pres->width0, level),
                                         u_minify(pres->height0, level),
